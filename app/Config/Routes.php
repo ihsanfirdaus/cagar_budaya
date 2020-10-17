@@ -30,7 +30,12 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
+// FRONTEND
 $routes->get('/', 'Frontend\Home::index');
+
+// BACKEND
+$routes->get('/admin','Backend\Dashboard::index');
 
 /**
  * --------------------------------------------------------------------

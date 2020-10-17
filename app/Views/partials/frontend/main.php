@@ -34,7 +34,6 @@
     <!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
-
     <!-- header-start -->
     <header>
         <div class="header-area ">
@@ -68,7 +67,9 @@
                                                     <li><a href="single-blog.html">single-blog</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="/admin">
+                                                <button class="btn btn-success btn-sm">Admin</button>
+                                            </a></li>
                                         </ul>
                                     </nav>
                                 </div>
