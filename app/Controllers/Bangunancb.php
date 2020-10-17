@@ -17,7 +17,7 @@ class Bangunancb extends BaseController
     {
         $data = [
             'title' => 'Cagar Budaya',
-            'bangunancb' => $this->bangunancbModel->getBangunancb();
+            'bangunancb' => $this->bangunancbModel->getBangunancb()
         ];
 
         return view('bangunancb/index', $data);
