@@ -1,9 +1,7 @@
 #-------------------------
 # Operating Specific Junk Files
 #-------------------------
-
-/public/adminlte
-/public/frontend 
+ 
 
 # OS X
 .DS_Store
