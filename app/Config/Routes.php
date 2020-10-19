@@ -36,6 +36,16 @@ $routes->get('/', 'Frontend\Home::index');
 
 // BACKEND
 $routes->get('/admin','Backend\Dashboard::index');
+// BACKEND - KATEGORI
+$routes->get('/admin/kategori','Backend\Kategori::index');
+$routes->get('/admin/kategori/create','Backend\Kategori::create');
+$routes->post('/admin/kategori/create','Backend\Kategori::create');
+
+// BACKEND - ARTIKEL
+$routes->get('/admin/artikel/(:alpha)','Backend\Artikel::index/$1'); 
+$routes->get('/admin/artikel/create/(:alpha)','Backend\Artikel::create/$1');
+$routes->post('/admin/artikel/create','Backend\Artikel::store');
+
 
 /**
  * --------------------------------------------------------------------
