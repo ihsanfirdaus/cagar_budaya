@@ -1,4 +1,4 @@
-<?= $this->extend('partials/backend/main') ?>
+<?= $this->extend('layouts/backend/main') ?>
 
 <?= $this->section('title') ?>
 Artikel Cagar Budaya

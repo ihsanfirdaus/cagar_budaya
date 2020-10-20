@@ -3,60 +3,70 @@
 namespace App\Controllers\Backend;
 
 use App\Controllers\BaseController;
+use App\Models\ArtikelFotoModel;
 use App\Models\ArtikelModel;
 use App\Models\KategoriModel;
 
 class Artikel extends BaseController
 {
+    public function __construct()
+    {
+        $this->artikelModel = new ArtikelModel();
+
+        $this->kategoriModel = new KategoriModel();
+
+        $this->artikelFotoModel = new ArtikelFotoModel();
+    }
+
     public function index($slug)
     {
-        // ArtikelModel
-        $artikelModel = new ArtikelModel();
-        // KategoriModel
-        $kategoriModel = new KategoriModel();
+        $getKategori = $this->kategoriModel->where(['slug' => $slug])->first();
 
-        $getKategori = $kategoriModel->where(['slug' => $slug])->first();
-   
-        $data = $artikelModel->getArtikelBySlug($getKategori['slug']);
-        
-        return view('pages/backend/artikel/index',[
+        $data = $this->artikelModel->getArtikelBySlug($getKategori['slug']);
+
+        return view('pages/backend/artikel/index', [
             'getKategori' => $getKategori,
             'data' => $data
         ]);
     }
 
+
     public function create($slug)
     {
-        $kategoriModel = new KategoriModel();
+        $getKategori = $this->kategoriModel->where(['slug' => $slug])->first();
 
-        $getKategori = $kategoriModel->where(['slug' => $slug])->first();
-
-        return view('pages/backend/artikel/create',[
+        return view('pages/backend/artikel/create', [
             'getKategori' => $getKategori
         ]);
     }
 
     public function store()
     {
-        $model = new ArtikelModel();
+        $data = $this->request->getVar([
+            'judul',
+            'id_kategori',
+            'no_regnas',
+            'sk_penetapan',
+            'provinsi',
+            'kabupaten_kota',
+            'nama_pemilik',
+            'nama_pengelola'
+        ]);
 
-        $data = [
-            'judul' => $this->request->getPost('judul'),
-            'id_kategori' => $this->request->getPost('id_kategori'),
-            'no_regnas' => $this->request->getPost('no_regnas'),
-            'sk_penetapan' => $this->request->getPost('sk_penetapan'),
-            'provinsi' => $this->request->getPost('provinsi'),
-            'kabupaten_kota' => $this->request->getPost('kabupaten_kota'),
-            'nama_pemilik' => $this->request->getPost('nama_pemilik'),
-            'nama_pengelola' => $this->request->getPost('nama_pengelola')
-        ];
-
-        $model->save($data);
+        // $foto = $this->request->getFile('foto');
+        // $filename = $foto->getRandomName();
+        // $moveFile = $foto->move('images/artikel',$filename);
         
-        $kategoriModel = new KategoriModel();
+        // $this->artikelFotoModel->save(['id_artikel' => 1]);
 
-        $getKategori = $kategoriModel->where(['id' => $this->request->getPost('id_kategori')])->first();
+        $this->artikelModel->save($data);
 
-        return redirect()->to('/admin/artikel/'.$getKategori['nama']);
+        $getKategori = $this->kategoriModel->where(['id' => $this->request->getPost('id_kategori')])->first();
+
+        // $getArtikel = $this->artikelModel->getArtikel();
+
+        // dd($getArtikel);
+
+        return redirect()->to('/admin/artikel/' . $getKategori['nama']);
     }
 }

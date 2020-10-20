@@ -14,7 +14,7 @@ class KategoriModel extends Model
         if($id === false){
             return $this->findAll();
         }else{
-            return $this->getWhere(['id' => $id]);
+            return $this->where(['id' => $id])->first();
         }
     } 
 }

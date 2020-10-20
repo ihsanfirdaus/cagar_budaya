@@ -29,6 +29,12 @@ class ArtikelModel extends Model
         {
             return $this->where(['id_kategori' => $getKategori['id']])->findAll();
         }
+    }
 
+    public function getArtikel($id = false)
+    {
+        if($id == false){
+            return $this->findAll();
+        }
     }
 }

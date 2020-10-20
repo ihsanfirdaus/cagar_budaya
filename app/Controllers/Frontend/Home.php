@@ -8,6 +8,6 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		return view('partials/frontend/main');
+		return view('layouts/frontend/main');
 	}
 }

@@ -39,7 +39,10 @@ $routes->get('/admin','Backend\Dashboard::index');
 // BACKEND - KATEGORI
 $routes->get('/admin/kategori','Backend\Kategori::index');
 $routes->get('/admin/kategori/create','Backend\Kategori::create');
-$routes->post('/admin/kategori/create','Backend\Kategori::create');
+$routes->post('/admin/kategori/store','Backend\Kategori::store');
+$routes->get('/admin/kategori/edit/(:num)','Backend\Kategori::edit/$1');
+$routes->post('/admin/kategori/update/(:num)','Backend\Kategori::update/$1');
+$routes->get('/admin/kategori/delete/(:num)','Backend\Kategori::destroy/$1');
 
 // BACKEND - ARTIKEL
 $routes->get('/admin/artikel/(:alpha)','Backend\Artikel::index/$1'); 
