@@ -48,6 +48,7 @@ $routes->get('/admin/kategori/delete/(:num)','Backend\Kategori::destroy/$1');
 $routes->get('/admin/artikel/(:alpha)','Backend\Artikel::index/$1'); 
 $routes->get('/admin/artikel/create/(:alpha)','Backend\Artikel::create/$1');
 $routes->post('/admin/artikel/create','Backend\Artikel::store');
+$routes->get('/admin/artikel/delete/(:num)','Backend\Artikel::destroy/$1');
 
 
 /**

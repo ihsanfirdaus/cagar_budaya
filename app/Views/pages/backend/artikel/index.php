@@ -1,3 +1,6 @@
+<?php
+$this->artikelModel = new App\Models\ArtikelModel();
+?>
 <?= $this->extend('layouts/backend/main') ?>
 
 <?= $this->section('title') ?>
@@ -21,16 +24,23 @@ Artikel Cagar Budaya
                     <tr>
                         <th width="10px">No</th>
                         <th>Judul</th>
+                        <th>Foto</th>
                         <th>NO REGNAS</th>
                         <th>Nama Pemilik</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                   <?php $no = 1; foreach($data as $artikel) { ?>
+                    <?php $no = 1;
+                    foreach ($data as $artikel) { ?>
                         <tr>
                             <td><?= $no ?></td>
                             <td><?= $artikel['judul'] ?></td>
+                            <td style="text-align: center;">
+                                <?php foreach ($this->artikelModel->getArtikelFoto($artikel['id']) as $artikelFoto) { ?>
+                                   <img src="/images/artikel/<?= $artikelFoto['foto'] ?>" class="zoom" alt="">
+                                <?php } ?>
+                            </td>
                             <td style="text-align: center;">
                                 <?= $artikel['no_regnas'] ?>
                             </td>
@@ -39,10 +49,11 @@ Artikel Cagar Budaya
                             </td>
                             <td style="text-align: center;">
                                 <a href="" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah</a>
-                                <a href="" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Hapus</a>
+                                <a href="/admin/artikel/delete/<?= $artikel['id'] ?>" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Hapus</a>
                             </td>
                         </tr>
-                   <?php $no++; } ?>
+                    <?php $no++;
+                    } ?>
                 </tbody>
             </table>
         </div>

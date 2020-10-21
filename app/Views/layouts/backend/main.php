@@ -110,13 +110,13 @@ $this->model = new KategoriModel();
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <?php foreach($this->model->getDataKategori() as $kategori) { ?>
-                                <li class="nav-item">
-                                    <a href="/admin/artikel/<?= $kategori['slug'] ?>" class="nav-link">
-                                        <i class="far fa-square nav-icon"></i>
-                                        <p><?= $kategori['nama'] ?></p>
-                                    </a>
-                                </li> 
+                                <?php foreach ($this->model->getDataKategori() as $kategori) { ?>
+                                    <li class="nav-item">
+                                        <a href="/admin/artikel/<?= $kategori['slug'] ?>" class="nav-link">
+                                            <i class="far fa-square nav-icon"></i>
+                                            <p><?= $kategori['nama'] ?></p>
+                                        </a>
+                                    </li>
                                 <?php } ?>
                             </ul>
                         </li>
@@ -141,6 +141,16 @@ $this->model = new KategoriModel();
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
+
+                    <?php if (!empty(session()->getFlashdata('success'))) { ?>
+
+                        <div class="alert alert-success">
+                            <i class="fa fa-check"></i> &nbsp;<?php echo session()->getFlashdata('success'); ?>
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+
+                    <?php } ?>
+
                     <?= $this->renderSection('content')  ?>
                     <!-- /.row -->
                 </div>

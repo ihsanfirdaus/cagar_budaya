@@ -26,7 +26,7 @@ class Artikel extends BaseController
 
         return view('pages/backend/artikel/index', [
             'getKategori' => $getKategori,
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -53,20 +53,35 @@ class Artikel extends BaseController
             'nama_pengelola'
         ]);
 
-        // $foto = $this->request->getFile('foto');
-        // $filename = $foto->getRandomName();
-        // $moveFile = $foto->move('images/artikel',$filename);
-        
-        // $this->artikelFotoModel->save(['id_artikel' => 1]);
+        // save artikel
+        $this->artikelModel->insert($data);
 
-        $this->artikelModel->save($data);
+        $slug = $this->artikelModel->getKategoriSlug($this->request->getVar('id_kategori'));
 
-        $getKategori = $this->kategoriModel->where(['id' => $this->request->getPost('id_kategori')])->first();
+        // save foto
+        $id_artikel = $this->artikelModel->getInsertID();
 
-        // $getArtikel = $this->artikelModel->getArtikel();
+        $foto = $this->request->getFile('foto');
 
-        // dd($getArtikel);
+        $filename = $foto->getRandomName();
 
-        return redirect()->to('/admin/artikel/' . $getKategori['nama']);
+        $this->artikelFotoModel->insert(['id_artikel' => $id_artikel, 'foto' => $filename]);
+
+        $foto->move('images/artikel',$filename);
+
+        session()->setFlashdata('success', 'Berhasil menambahkan data');
+
+        return redirect()->to('/admin/artikel/' . $slug);
+    }
+
+    public function destroy($id)
+    {
+        $getArtikel = $this->artikelModel->where(['id' => $id])->first();
+
+        $slug = $this->artikelModel->getKategoriSlug($getArtikel['id_kategori']);
+
+        $this->artikelModel->delete($id);
+
+        return redirect()->to('/admin/artikel/' . $slug);
     }
 }

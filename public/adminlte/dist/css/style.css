@@ -34,3 +34,16 @@
   display: none;
   margin-top: 10px;
 }
+
+.zoom {
+  border: 1px solid black;
+  transition: transform 0.2s;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.zoom:hover {
+  transform: scale(5.5);
+}

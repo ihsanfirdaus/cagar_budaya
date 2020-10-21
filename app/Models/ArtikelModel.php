@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\Models;
 
 use CodeIgniter\Model;
@@ -19,22 +20,32 @@ class ArtikelModel extends Model
         'nama_pengelola'
     ];
 
-    public function getArtikelBySlug($slug = true)
+    public function getArtikelBySlug($slug)
     {
-        $kategoriModel = new KategoriModel();
-        
-        $getKategori = $kategoriModel->where(['slug' => $slug])->first();
+        $this->kategoriModel = new KategoriModel();
 
-        if ($slug == true)
-        {
+        $getKategori = $this->kategoriModel->where(['slug' => $slug])->first();
+
+        if ($slug == true) {
             return $this->where(['id_kategori' => $getKategori['id']])->findAll();
         }
     }
 
-    public function getArtikel($id = false)
+    public function getKategoriSlug($id_kategori)
     {
-        if($id == false){
-            return $this->findAll();
-        }
+        $this->kategoriModel = new KategoriModel();
+
+        $slug = $this->kategoriModel->where(['id' => $id_kategori])->first();
+
+        return $slug['slug'];
+    }
+
+    public function getArtikelFoto($id_artikel)
+    {
+        $this->artikelFotoModel = new ArtikelFotoModel();
+
+        $foto = $this->artikelFotoModel->where(['id_artikel' => $id_artikel])->findAll();
+
+        return $foto;
     }
 }
