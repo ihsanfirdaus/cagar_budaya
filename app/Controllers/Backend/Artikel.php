@@ -59,19 +59,38 @@ class Artikel extends BaseController
         $slug = $this->artikelModel->getKategoriSlug($this->request->getVar('id_kategori'));
 
         // save foto
-        $id_artikel = $this->artikelModel->getInsertID();
+        $idArtikel = $this->artikelModel->getInsertID();
 
-        $foto = $this->request->getFile('foto');
-
-        $filename = $foto->getRandomName();
-
-        $this->artikelFotoModel->insert(['id_artikel' => $id_artikel, 'foto' => $filename]);
-
-        $foto->move('images/artikel',$filename);
+        if($imagefile = $this->request->getFiles()) {
+            foreach($imagefile['foto'] as $foto)
+            {
+                if ($foto->isValid() && !$foto->hasMoved())
+                {
+                    $newName = $foto->getRandomName();
+                    $this->artikelFotoModel->insert(['id_artikel' => $idArtikel, 'foto' => $newName]);
+                    $foto->move('images/artikel',$newName);
+                }
+            }
+        }
 
         session()->setFlashdata('success', 'Berhasil menambahkan data');
 
         return redirect()->to('/admin/artikel/' . $slug);
+    }
+
+    public function edit($id)
+    {
+        $data = $this->artikelModel->where(['id' => $id])->first();
+
+        $getKategori = $this->kategoriModel->where(['id' => $data['id_kategori']])->first();
+
+        $getArtikelFoto = $this->artikelModel->getArtikelFoto($data['id']);
+
+        return view('pages/backend/artikel/edit',[
+            'data' => $data,
+            'getKategori' => $getKategori,
+            'getArtikelFoto' => $getArtikelFoto
+        ]);
     }
 
     public function destroy($id)

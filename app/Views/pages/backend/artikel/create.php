@@ -47,16 +47,9 @@ $generateRandom = rand(11111111, 999999999) . '.' . rand(00, 99) . '.' . rand(11
                         <label for="nama_pengelola" class="control-label">Nama Pengelola</label>
                         <input type="text" name="nama_pengelola" id="nama_pengelola" class="form-control">
                     </div>
-                    <div class="form-group col-lg-6">
-
-                        <div class="form-input">
-                            <label for="file-ip-1">Upload Foto</label>
-                            <input type="file" id="file-ip-1" name="foto" accept="image/*" onchange="showPreview(event);">
-                            <div class="preview">
-                                <img id="file-ip-1-preview">
-                            </div>
-                        </div>
-
+                    <div class="form-group col-lg-12">
+                        <label for="foto" class="control-label">Upload Foto</label>
+                        <input type="file" name="foto[]" id="foto" class="form-control" multiple>
                     </div>
                 </div>
                 <input type="hidden" name="id_kategori" value="<?= $getKategori['id'] ?>">

@@ -40,12 +40,12 @@ class ArtikelModel extends Model
         return $slug['slug'];
     }
 
-    public function getArtikelFoto($id_artikel)
+    public function getArtikelFoto($id)
     {
         $this->artikelFotoModel = new ArtikelFotoModel();
 
-        $foto = $this->artikelFotoModel->where(['id_artikel' => $id_artikel])->findAll();
-
+        $foto = $this->artikelFotoModel->where(['id_artikel' => $id])->findAll();
+        
         return $foto;
     }
 }

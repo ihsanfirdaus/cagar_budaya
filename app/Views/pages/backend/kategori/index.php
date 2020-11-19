@@ -37,8 +37,8 @@ Kategori Cagar Budaya
                             <td><?= $no ?></td>
                             <td><?= $kategori['nama'] ?></td>
                             <td style="text-align: center;">
-                                <a href="/admin/kategori/edit/<?= $kategori['id'] ?>" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah</a>
-                                <a onclick="return confirm('Anda yakin ingin menghapus data ini ?')" href="/admin/kategori/delete/<?= $kategori['id'] ?>" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Hapus</a>
+                                <a href="/admin/kategori/edit/<?= $kategori['id'] ?>" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Ubah</a>
+                                <a onclick="return confirm('Anda yakin ingin menghapus data ini ?')" href="/admin/kategori/delete/<?= $kategori['id'] ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i> Hapus</a>
                             </td>
                         </tr>
                     <?php $no++;

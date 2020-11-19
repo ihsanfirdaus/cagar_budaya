@@ -70,8 +70,38 @@ $(document).ready(function() {
 function showPreview(event){
     if(event.target.files.length > 0){
         var src = URL.createObjectURL(event.target.files[0]);
-        var preview = document.getElementById("file-ip-1-preview");
+        var preview = document.getElementById("foto-preview");
         preview.src = src;
         preview.style.display = "block";
     }
 }
+
+// UPLOAD MULTIPLE
+var max_upload = 4;
+var upload = 1;
+  $("#addUpload").on('click', function (e) {
+    e.preventDefault();
+    if (upload < max_upload) {
+      upload++;
+      
+      $(".input_foto").append(
+       ` <div class="col-lg-3">
+            <div class="form-input">
+                <label for="foto">Upload Foto</label>
+                <input type="file" class="foto" name="foto[]" accept="image/*" onchange="showPreview(event);">
+                <div class="preview">
+                    <img class="foto-preview">
+                </div>
+            </div>
+        </div>`
+      );
+
+    }
+  });
+
+  $(".input_foto").on("click", ".remove_upload", function () {
+    $(this)
+      .parents("#parentUpload")
+      .remove();
+    upload--;
+  });

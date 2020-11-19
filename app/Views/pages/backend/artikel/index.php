@@ -24,7 +24,6 @@ Artikel Cagar Budaya
                     <tr>
                         <th width="10px">No</th>
                         <th>Judul</th>
-                        <th>Foto</th>
                         <th>NO REGNAS</th>
                         <th>Nama Pemilik</th>
                         <th>Aksi</th>
@@ -37,19 +36,14 @@ Artikel Cagar Budaya
                             <td><?= $no ?></td>
                             <td><?= $artikel['judul'] ?></td>
                             <td style="text-align: center;">
-                                <?php foreach ($this->artikelModel->getArtikelFoto($artikel['id']) as $artikelFoto) { ?>
-                                   <img src="/images/artikel/<?= $artikelFoto['foto'] ?>" class="zoom" alt="">
-                                <?php } ?>
-                            </td>
-                            <td style="text-align: center;">
                                 <?= $artikel['no_regnas'] ?>
                             </td>
                             <td style="text-align: center;">
                                 <?= $artikel['nama_pemilik'] ?>
                             </td>
                             <td style="text-align: center;">
-                                <a href="" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah</a>
-                                <a href="/admin/artikel/delete/<?= $artikel['id'] ?>" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Hapus</a>
+                                <a href="/admin/artikel/edit/<?= $artikel['id'] ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
+                                <a href="/admin/artikel/delete/<?= $artikel['id'] ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash-alt"></i> Hapus</a>
                             </td>
                         </tr>
                     <?php $no++;
